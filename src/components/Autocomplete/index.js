@@ -61,6 +61,29 @@ const Autocomplete = ({ data, onChange, onSelect, placeholder, value }) => {
     }
   };
 
+  const matchingTextLength = (string, element) => {
+    // function returns length of mathing text (user input <=> data element)
+    const formattedString = string.toLowerCase().replace(/\s+/g, " ").trim(); // using regexp to replace multiple spaces with one, trim trailing spaces with .trim()
+    const elementString = element.toLowerCase();
+
+    if (formattedString === elementString.slice(0, formattedString.length)) {
+      return formattedString.length;
+    } else {
+      return 0;
+    }
+  };
+
+  const renderOptionText = (element, value) => {
+    // function returns option text based on matching length
+    const matchingLength = matchingTextLength(value, element);
+    return (
+      <>
+        <b>{element.slice(0, matchingLength)}</b>
+        {element.slice(matchingLength)}
+      </>
+    );
+  };
+
   useEffect(() => {
     setKeyIndex(null); // keyIndex is unset by default
   }, [data]);
@@ -85,7 +108,7 @@ const Autocomplete = ({ data, onChange, onSelect, placeholder, value }) => {
               onMouseDown={(event) => handleClick(event, index)}
               className={index === keyIndex ? styles.selected : ""}
             >
-              {element}
+              {renderOptionText(element, value)}
             </li>
           ))}
         </ul>
