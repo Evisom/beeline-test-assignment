@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/beeline-test-assignment/static/css/main.8c03acb4.css",
+    "main.js": "/beeline-test-assignment/static/js/main.af7f0b48.js",
+    "index.html": "/beeline-test-assignment/index.html",
+    "main.8c03acb4.css.map": "/beeline-test-assignment/static/css/main.8c03acb4.css.map",
+    "main.af7f0b48.js.map": "/beeline-test-assignment/static/js/main.af7f0b48.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8c03acb4.css",
+    "static/js/main.af7f0b48.js"
+  ]
+}
