@@ -1,6 +1,6 @@
 # beeline-test-assignment
 
-[Посмотреть на GitHub pages]()
+[Посмотреть на GitHub pages](https://evisom.github.io/beeline-test-assignment/)
 
 ### Запуск проекта
 
@@ -20,7 +20,7 @@ Autocomplete компонент с использованием React. Зада�
 
 Собрать проект
 
-`npm run build`
+`~$ npm run build`
 
 ### Описание
 
