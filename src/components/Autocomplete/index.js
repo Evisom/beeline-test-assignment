@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import styles from "./index.module.css";
 
 const Autocomplete = ({ data, onChange, onSelect, placeholder, value }) => {
   const [keyIndex, setKeyIndex] = useState(null);
+  const optionsRef = useRef(null);
   const handleChange = (event) => {
     onChange(event.target.value);
   };
@@ -12,12 +13,16 @@ const Autocomplete = ({ data, onChange, onSelect, placeholder, value }) => {
   };
 
   const handleKeyDown = (event) => {
-    console.log(event.key, keyIndex);
+    const cursorPosition = event.target.selectionStart;
     switch (event.key) {
       case "ArrowUp":
         if (keyIndex) {
           setKeyIndex(keyIndex - 1);
+          scrollToOption(keyIndex - 1);
         }
+        setTimeout(() => {
+          event.target.setSelectionRange(cursorPosition, cursorPosition);
+        });
         break;
 
       case "ArrowDown":
@@ -25,7 +30,9 @@ const Autocomplete = ({ data, onChange, onSelect, placeholder, value }) => {
           setKeyIndex(0);
         } else if (keyIndex < data.length - 1) {
           setKeyIndex(keyIndex + 1);
+          scrollToOption(keyIndex + 1);
         }
+        event.target.setSelectionRange(cursorPosition, cursorPosition);
         break;
 
       case "Enter":
@@ -35,6 +42,13 @@ const Autocomplete = ({ data, onChange, onSelect, placeholder, value }) => {
         break;
       default:
         break;
+    }
+  };
+
+  const scrollToOption = (index) => {
+    const option = optionsRef.current.children[index];
+    if (option) {
+      option.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
   };
 
@@ -52,7 +66,7 @@ const Autocomplete = ({ data, onChange, onSelect, placeholder, value }) => {
       />
 
       {data.length ? (
-        <ul className={styles.autocomplete__options}>
+        <ul className={styles.autocomplete__options} ref={optionsRef}>
           {data.map((element, index) => {
             return (
               <li
