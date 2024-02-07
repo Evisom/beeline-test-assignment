@@ -1,35 +1,51 @@
 .autocomplete {
   position: relative;
-  height: 50px;
-  min-width: 200px;
+  height: 44px;
+  min-width: 250px;
 }
 
 .autocomplete__input {
+  background: #fdfdfe;
   height: 100%;
   width: 100%;
   padding: 16px;
   outline: none;
-  border: 1px solid black;
+  border: 2px solid #d7d9dc;
   font-size: 14px;
+  border-radius: 6px;
+}
+
+.autocomplete__input:focus {
+  border: 2px solid black;
 }
 
 .autocomplete__options {
   position: absolute;
   margin: 0;
   padding: 0;
-  top: 49px;
+  top: 52px;
   width: 100%;
   list-style: none;
-  border: 1px solid black;
-  border-top: none;
+  border: 2px solid #d7d9dc;
+  border-radius: 6px;
   max-height: 180px;
   overflow-y: scroll;
+  background: #fdfdfe;
 }
 
-.autocomplete__option {
-  padding: 6px 16px;
+.autocomplete__options > li {
+  padding: 10px 16px;
+  cursor: pointer;
 }
 
-.autocomplete__option:hover {
+.autocomplete__options > li:not(:last-child) {
+  border-bottom: 2px solid #d7d9dc;
+}
+
+.autocomplete__options > li:hover {
+  background-color: #f1f1f1;
+}
+
+.selected {
   background-color: #f1f1f1;
 }

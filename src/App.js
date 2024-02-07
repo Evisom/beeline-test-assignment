@@ -5,7 +5,7 @@ import { useState } from "react";
 const App = () => {
   const [data, setData] = useState([]);
   const [value, setValue] = useState("");
-  const handleChange = (string) => {
+  const handleChange = async (string) => {
     setValue(string);
     const formattedString = string.toLowerCase().replace(/\s+/g, " ").trim();
     fetch("https://dummyjson.com/products")
@@ -28,13 +28,20 @@ const App = () => {
       });
   };
 
+  const handleSelect = (val) => {
+    setData([]);
+    setValue(val);
+  };
+
   return (
     <div className="App">
       <p>Autocomplete component</p>
+      <p>value: {value}</p>
       <Autocomplete
         data={data}
         placeholder="Начните вводить текст..."
         onChange={handleChange}
+        onSelect={handleSelect}
         value={value}
       />
     </div>
